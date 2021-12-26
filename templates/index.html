@@ -87,13 +87,36 @@
             }
 
             function showArticles() {
+                let cards_box = $('#cards-box')
                 $.ajax({
                     type: "GET",
                     url: "/memo",
                     data: {},
                     success: function (response) {
                         if (response["result"] == "success") {
-                            alert(response["msg"]);
+
+                            let articles = response['articles']
+                            for (let i = 0; i < articles.length; i++) {
+                                let article = articles[i]
+                                let img_url = article['img_url']
+                                let url = article['url']
+                                let title = article['title']
+                                let description = article['description']
+                                let comment = article['comment']
+                                let temp_html = `
+                                <div class="card">
+                                    <img class="card-img-top"
+                                         src="${img_url}"
+                                         alt="Card image cap">
+                                    <div class="card-body">
+                                         <a href="${url}" class="card-title">${title}</a>
+                                         <p class="card-text">${description}</p>
+                                         <p class="card-text comment">${comment}</p>
+                                    </div>
+                                </div>
+                                `
+                                cards_box.append(temp_html)
+                            }
                         }
                     }
                 })
