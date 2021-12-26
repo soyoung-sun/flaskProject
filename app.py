@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 
@@ -7,6 +7,15 @@ app = Flask(__name__)
 def hello_world():  # put application's code here
     # render_template 함수는 templates 폴더에 있는 html 파일을 웹브라우저에게 전달
     return render_template('index.html')
+
+
+@app.route('/memo')
+def show_articles():
+    result = {
+        'result':'success',
+        'msg':'test'
+    }
+    return jsonify(result)
 
 
 if __name__ == '__main__':
