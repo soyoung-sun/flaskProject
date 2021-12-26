@@ -14,10 +14,15 @@ def hello_world():  # put application's code here
 
 @app.route('/memo')
 def show_articles():
+    articles = db.article.find({}, {'_id':False})
+
     result = {
         'result': 'success',
-        'msg': 'test'
+        'articles': list(articles)
     }
+
+    print(result)
+
     return jsonify(result)
 
 
